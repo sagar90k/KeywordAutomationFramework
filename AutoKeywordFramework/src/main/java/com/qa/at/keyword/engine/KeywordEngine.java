@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -94,7 +95,7 @@ public class KeywordEngine {
 				switch (locatorName) {
 				case "id":
 					WebElement element = driver.findElement(By.id(locatorValue));
-
+					
 					if (action.equalsIgnoreCase("sendkeys")) {
 						element.clear();
 						element.sendKeys(value);
@@ -110,15 +111,22 @@ public class KeywordEngine {
 					element.click();
 					locatorName = null;
 					break;
-
+				
+				case "waitFor30sec":
+					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+					break;
+				
+				case "maximize":
+					driver.manage().window().maximize();
+					break;
+					
 				default:
 					break;
-
 				}
-
 			}
 
-			catch (Exception e) {
+			catch (Exception e) 
+			{
 
 			}
 
