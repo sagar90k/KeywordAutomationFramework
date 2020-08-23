@@ -17,10 +17,10 @@ public class Base {
 	public WebDriver init_driver(String browserName) {
 		
 		if (browserName.equals("chrome")) 
-			{			
-				System.setProperty("webdriver.chrome.driver","G:\\Sele Project\\AutoKeywordFramework\\src\\main\\resources\\drivers\\chromedriver.exe");			
+		{
+				System.setProperty("webdriver.chrome.driver","C:\\Users\\AMAR\\git\\KeywordAutomationFramework\\AutoKeywordFramework\\src\\main\\resources\\drivers\\chromedriver.exe");			
 				driver = new ChromeDriver();				
-			}		
+		}
 		return driver;
 }
 
@@ -29,10 +29,10 @@ public class Base {
 	public Properties init_properties() {
 		
 		prop = new Properties();
-
+		
 		try {
 			FileInputStream ip = new FileInputStream(
-					"G:\\Sele Project\\AutoKeywordFramework\\src\\main\\java\\com\\qa\\at\\keyword\\config\\config.properties");
+					"C:\\Users\\AMAR\\git\\KeywordAutomationFramework\\AutoKeywordFramework\\src\\main\\java\\com\\qa\\at\\keyword\\config\\config.properties");
 			prop.load(ip);			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

@@ -24,8 +24,8 @@ public class KeywordEngine {
 	public static Sheet sheet;
 
 	public Base base;
-
-	public final String SCENARIO_SHEET_PATH = "G:\\Sele Project\\AutoKeywordFramework\\src\\main\\java\\com\\qa\\at\\keyword\\scenarios\\scenarios.xlsx";
+	
+	public final String SCENARIO_SHEET_PATH = "C:\\Users\\AMAR\\git\\KeywordAutomationFramework\\AutoKeywordFramework\\src\\main\\java\\com\\qa\\at\\keyword\\scenarios\\scenarios.xlsx";
 
 
 	public void startExecution(String sheetName) {
