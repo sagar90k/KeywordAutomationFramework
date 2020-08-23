@@ -82,7 +82,15 @@ public class KeywordEngine {
 						driver.get(value);
 					}
 					break;
-
+					
+				case "waitFor30sec":
+					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+					break;
+				
+				case "maximize":
+					driver.manage().window().maximize();
+					break;
+					
 				case "quit":
 					driver.quit();
 					break;
@@ -113,14 +121,7 @@ public class KeywordEngine {
 					locatorName = null;
 					break;
 				
-				case "waitFor30sec":
-					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-					break;
 				
-				case "maximize":
-					driver.manage().window().maximize();
-					break;
-					
 				default:
 					break;
 				}
