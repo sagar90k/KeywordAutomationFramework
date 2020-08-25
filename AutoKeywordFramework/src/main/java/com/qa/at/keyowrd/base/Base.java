@@ -8,6 +8,7 @@ import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import java.util.*;
 
 public class Base {
 
@@ -19,10 +20,14 @@ public class Base {
 		if (browserName.equals("chrome")) 
 		{
 				System.setProperty("webdriver.chrome.driver","C:\\Users\\AMAR\\git\\KeywordAutomationFramework\\AutoKeywordFramework\\src\\main\\resources\\drivers\\chromedriver.exe");			
-				driver = new ChromeDriver();	
 				
 				ChromeOptions options = new ChromeOptions();
-				options.addArguments("disable-infobars"); 
+				options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+				options.setExperimentalOption("useAutomationExtension", false);
+				
+				driver = new ChromeDriver(options);	
+				
+				
 		}
 		return driver;
 }
