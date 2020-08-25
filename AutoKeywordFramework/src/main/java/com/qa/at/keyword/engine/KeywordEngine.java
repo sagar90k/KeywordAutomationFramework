@@ -26,13 +26,14 @@ public class KeywordEngine {
 
 	public Base base;
 	
+	public WebElement element;
+	
 	public final String SCENARIO_SHEET_PATH = "C:\\Users\\AMAR\\git\\KeywordAutomationFramework\\AutoKeywordFramework\\src\\main\\java\\com\\qa\\at\\keyword\\scenarios\\scenarios.xlsx";
-
 
 	public void startExecution(String sheetName) {
 
-		String locatorName = null;
-		String locatorValue = null;
+		String locatorName=null;
+		String locatorValue=null;
 
 		FileInputStream file = null;
 
@@ -58,13 +59,15 @@ public class KeywordEngine {
 			try {
 				String locatorColValue = sheet.getRow(i + 1).getCell(k + 1).toString().trim();
 				if (!locatorColValue.equalsIgnoreCase("NA")) {
-					locatorColValue.split("=")[0].trim();// id
+					locatorName=locatorColValue.split("=")[0].trim();// id
 					locatorValue = locatorColValue.split("=")[1].trim(); // username
 				}
 				String action = sheet.getRow(i + 1).getCell(k + 2).toString().trim();
 				String value = sheet.getRow(i + 1).getCell(k + 3).toString().trim();
-
+				System.out.println("locatorValue:"+locatorValue);
+				
 				switch (action) {
+				
 				case "open browser":
 					base = new Base();
 					prop = base.init_properties();
@@ -83,23 +86,17 @@ public class KeywordEngine {
 					}
 					break;
 					
-				case "waitFor30sec":
-					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-					break;
-				
-				case "maximize":
-					driver.manage().window().maximize();
-					break;
-					
+							
 				case "quit":
 					driver.quit();
 					break;
 
 				default:
 					break;
-
 				}
 
+				
+				
 				switch (locatorName) {
 				case "id":
 					WebElement element = driver.findElement(By.id(locatorValue));
@@ -112,7 +109,8 @@ public class KeywordEngine {
 					} else if (action.equalsIgnoreCase("click")) {
 						element.click();
 					}
-
+					
+					locatorName = null;
 					break;
 
 				case "linkText":
