@@ -26,7 +26,7 @@ public class KeywordEngine {
 
 	public Base base;
 	
-	public WebElement element= null;
+	public WebElement element;
 	
 	public final String SCENARIO_SHEET_PATH = "C:\\Users\\AMAR\\git\\KeywordAutomationFramework\\AutoKeywordFramework\\src\\main\\java\\com\\qa\\at\\keyword\\scenarios\\scenarios.xlsx";
 
@@ -68,7 +68,7 @@ public class KeywordEngine {
 				
 				switch (action) {
 				
-				case "id" :
+				case "open browser":
 					base = new Base();
 					prop = base.init_properties();
 					if (value.isEmpty() || value.equals("NA")) {
@@ -97,13 +97,12 @@ public class KeywordEngine {
 
 				
 				
-				switch (locatorName) {
+				switch (locatorColValue) {
 				case "id":
 					WebElement element = driver.findElement(By.id(locatorValue));
 					
-					if (action.equalsIgnoreCase("sendkeys")) 
-					{
-						
+					if (action.equalsIgnoreCase("sendkeys")) {
+						element.click();
 						element.clear();
 						element.sendKeys(value);
 
