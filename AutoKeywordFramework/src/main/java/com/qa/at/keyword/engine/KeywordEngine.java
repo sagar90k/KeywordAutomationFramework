@@ -26,7 +26,7 @@ public class KeywordEngine {
 
 	public Base base;
 	
-	public WebElement element;
+	public WebElement element = null;
 	
 	public final String SCENARIO_SHEET_PATH = "C:\\Users\\AMAR\\git\\KeywordAutomationFramework\\AutoKeywordFramework\\src\\main\\java\\com\\qa\\at\\keyword\\scenarios\\scenarios.xlsx";
 
@@ -86,6 +86,18 @@ public class KeywordEngine {
 					}
 					break;
 					
+				case "sendkeys":
+					if (action.equalsIgnoreCase("sendkeys")) {
+						
+						
+						element.sendKeys(value);
+
+					} 
+					else if (action.equalsIgnoreCase("click")) {
+						element.click();
+					}
+					
+					break;
 							
 				case "quit":
 					driver.quit();
@@ -97,25 +109,20 @@ public class KeywordEngine {
 		
 				
 				switch (locatorName) {
+				
 				case "class":
 					WebElement element = driver.findElement(By.className(locatorValue));
 					
-					if (action.equalsIgnoreCase("sendkeys")) {
-						element.click();
-						element.clear();
-						element.sendKeys(value);
-
-					} else if (action.equalsIgnoreCase("click")) {
-						element.click();
-					}
 					
 					locatorName = null;
+					locatorValue = null;
 					break;
 
 				case "linkText":
 					element = driver.findElement(By.linkText(locatorValue));
 					element.click();
 					locatorName = null;
+					locatorValue = null;
 					break;
 				
 				
