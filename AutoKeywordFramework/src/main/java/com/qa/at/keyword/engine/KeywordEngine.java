@@ -97,13 +97,12 @@ public class KeywordEngine {
 
 				
 				
-				switch (locatorColValue) {
-				case "id":
-					WebElement element = driver.findElement(By.id(locatorValue));
+				switch (locatorName) {
+				case "class":
+					WebElement element = driver.findElement(By.className(locatorValue));
 					
 					if (action.equalsIgnoreCase("sendkeys")) {
-						element.click();
-						element.clear();
+												element.clear();
 						element.sendKeys(value);
 
 					} else if (action.equalsIgnoreCase("click")) {
