@@ -19,7 +19,10 @@ public class Base {
 		if (browserName.equals("chrome")) 
 		{
 				System.setProperty("webdriver.chrome.driver","C:\\Users\\AMAR\\git\\KeywordAutomationFramework\\AutoKeywordFramework\\src\\main\\resources\\drivers\\chromedriver.exe");			
-				driver = new ChromeDriver();				
+				driver = new ChromeDriver();	
+				
+				ChromeOptions options = new ChromeOptions();
+				options.addArguments("disable-infobars"); 
 		}
 		return driver;
 }

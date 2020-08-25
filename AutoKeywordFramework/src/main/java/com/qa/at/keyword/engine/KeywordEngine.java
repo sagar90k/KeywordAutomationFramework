@@ -101,7 +101,8 @@ public class KeywordEngine {
 					WebElement element = driver.findElement(By.className(locatorValue));
 					
 					if (action.equalsIgnoreCase("sendkeys")) {
-												element.clear();
+						element.click();
+						element.clear();
 						element.sendKeys(value);
 
 					} else if (action.equalsIgnoreCase("click")) {
