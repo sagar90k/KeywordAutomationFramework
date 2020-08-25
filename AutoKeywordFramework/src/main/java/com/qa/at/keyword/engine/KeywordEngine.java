@@ -66,6 +66,22 @@ public class KeywordEngine {
 				String value = sheet.getRow(i + 1).getCell(k + 3).toString().trim();
 				System.out.println("locatorValue:"+locatorValue);
 				
+				switch (locatorName) {
+				
+				case "class":
+					element = driver.findElement(By.className(locatorValue));
+					break;
+
+				case "linkText":
+					element = driver.findElement(By.linkText(locatorValue));
+				
+					break;
+				
+				
+				default:
+					break;
+				}
+
 				switch (action) {
 				
 				case "open browser":
@@ -88,47 +104,17 @@ public class KeywordEngine {
 					
 				case "sendkeys":
 					if (action.equalsIgnoreCase("sendkeys")) {
-						
-						
 						element.sendKeys(value);
-
 					} 
 					else if (action.equalsIgnoreCase("click")) {
 						element.click();
 					}
-					
 					break;
-							
-				case "quit":
-					driver.quit();
-					break;
-
 				default:
 					break;
 				}
-		
-				
-				switch (locatorName) {
-				
-				case "class":
-					WebElement element = driver.findElement(By.className(locatorValue));
-					
-					
-					locatorName = null;
-					locatorValue = null;
-					break;
 
-				case "linkText":
-					element = driver.findElement(By.linkText(locatorValue));
-					element.click();
-					locatorName = null;
-					locatorValue = null;
-					break;
 				
-				
-				default:
-					break;
-				}
 			}
 
 			catch (Exception e) 
