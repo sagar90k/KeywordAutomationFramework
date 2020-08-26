@@ -86,8 +86,6 @@ public class KeywordEngine {
 					}
 					break;
 					
-				
-					
 				default:
 					break;
 				}
@@ -98,7 +96,7 @@ public class KeywordEngine {
 				{
 				
 				case "class":
-					WebElement element = driver.findElement(By.className(locatorValue));
+					 element = driver.findElement(By.className(locatorValue));
 					if (action.equalsIgnoreCase("sendkeys")) 
 					{
 						element.sendKeys(value);
