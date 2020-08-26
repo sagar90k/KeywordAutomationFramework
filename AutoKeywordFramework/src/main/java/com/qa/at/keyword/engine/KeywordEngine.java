@@ -26,7 +26,7 @@ public class KeywordEngine {
 
 	public Base base;
 	
-	public WebElement element = null;
+	public WebElement element;
 	
 	public final String SCENARIO_SHEET_PATH = "C:\\Users\\AMAR\\git\\KeywordAutomationFramework\\AutoKeywordFramework\\src\\main\\java\\com\\qa\\at\\keyword\\scenarios\\scenarios.xlsx";
 
