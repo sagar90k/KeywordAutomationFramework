@@ -55,56 +55,26 @@ public class KeywordEngine {
 		sheet = book.getSheet(sheetName);
 
 		int k = 0;
-		for (int i = 0; i < sheet.getLastRowNum(); i++) {
+		for (int i = 0; i < sheet.getLastRowNum(); i++) 
+		{
+			
 			try {
-				 locatorType = sheet.getRow(i + 1).getCell(k + 1).toString().trim();
+				
+				locatorType = sheet.getRow(i + 1).getCell(k + 1).toString().trim();
 				locatorValue = sheet.getRow(i + 1).getCell(k + 2).toString().trim();
-				
-				
+								
 				String action = sheet.getRow(i + 1).getCell(k + 3).toString().trim();
 				String value = sheet.getRow(i + 1).getCell(k + 4).toString().trim();
 				
 				//System.out.println("locatorValue:"+locatorValue);
 				
-				switch (action) {
-				
-				case "open browser":
-					base = new Base();
-					prop = base.init_properties();
-					if (value.isEmpty() || value.equals("NA")) {
-						driver = base.init_driver(prop.getProperty("browser"));
-					} else {
-						driver = base.init_driver(value);
-					}
-					break;
-
-				case "enter url":
-					if (value.isEmpty() || value.equals("NA")) {
-						driver.get(prop.getProperty("url"));
-					} else {
-						driver.get(value);
-					}
-					break;
-					
-				default:
-					break;
-				}
-				
-				
-				
 				switch (locatorType) 
 				{
 				
 				case "class":
-					 element = driver.findElement(By.className(locatorValue));
-					if (action.equalsIgnoreCase("sendkeys")) 
-					{
-						element.sendKeys(value);
-					} 
-					else if (action.equalsIgnoreCase("click")) 
-					{
-						element.click();
-					}
+					
+					element = driver.findElement(By.className(locatorValue));
+					
 					locatorType = null;
 					break;
 					
@@ -119,6 +89,42 @@ public class KeywordEngine {
 					break;
 					
 				}
+				
+				switch (action) {
+				
+				case "open browser":
+					base = new Base();
+					prop = base.init_properties();
+					if (value.isEmpty() || value.equals("NA")) {
+						driver = base.init_driver(prop.getProperty("browser"));
+					} else {
+						driver = base.init_driver(value);
+					}
+					break;
+					
+				case "sendkeys":
+					if (action.equalsIgnoreCase("sendkeys")) 
+					{
+						element.sendKeys(value);
+					} 
+					else if (action.equalsIgnoreCase("click")) 
+					{
+						element.click();
+					}
+					break;
+					
+				case "enter url":
+					if (value.isEmpty() || value.equals("NA")) {
+						driver.get(prop.getProperty("url"));
+					} else {
+						driver.get(value);
+					}
+					break;
+					
+				default:
+					break;
+				}
+				
 			}
 
 			catch (Exception e) 
