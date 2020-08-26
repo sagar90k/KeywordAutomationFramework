@@ -113,6 +113,13 @@ public class KeywordEngine {
 					}
 					break;
 					
+				case "click":
+				 if (action.equalsIgnoreCase("click")) 
+					{
+						element.click();
+					}
+					break;
+					
 				case "enter url":
 					if (value.isEmpty() || value.equals("NA")) {
 						driver.get(prop.getProperty("url"));
