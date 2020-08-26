@@ -136,7 +136,7 @@ public class KeywordEngine {
 
 			catch (Exception e) 
 			{
-
+				e.printStackTrace();
 			}
 
 		}
