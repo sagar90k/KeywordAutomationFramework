@@ -32,7 +32,7 @@ public class KeywordEngine {
 
 	public void startExecution(String sheetName) {
 
-		String locatorName=null;
+		String locatorType=null;
 		String locatorValue=null;
 
 		FileInputStream file = null;
@@ -57,14 +57,14 @@ public class KeywordEngine {
 		int k = 0;
 		for (int i = 0; i < sheet.getLastRowNum(); i++) {
 			try {
-				String locatorColValue = sheet.getRow(i + 1).getCell(k + 1).toString().trim();
-				if (!locatorColValue.equalsIgnoreCase("NA")) {
-					locatorName=locatorColValue.split("=")[0].trim();// id
-					locatorValue = locatorColValue.split("=")[1].trim(); // username
-				}
-				String action = sheet.getRow(i + 1).getCell(k + 2).toString().trim();
-				String value = sheet.getRow(i + 1).getCell(k + 3).toString().trim();
-				System.out.println("locatorValue:"+locatorValue);
+				 locatorType = sheet.getRow(i + 1).getCell(k + 1).toString().trim();
+				locatorValue = sheet.getRow(i + 1).getCell(k + 2).toString().trim();
+				
+				
+				String action = sheet.getRow(i + 1).getCell(k + 3).toString().trim();
+				String value = sheet.getRow(i + 1).getCell(k + 4).toString().trim();
+				
+				//System.out.println("locatorValue:"+locatorValue);
 				
 				switch (action) {
 				
@@ -94,7 +94,7 @@ public class KeywordEngine {
 				
 				
 				
-				switch (locatorName) 
+				switch (locatorType) 
 				{
 				
 				case "class":
@@ -107,13 +107,13 @@ public class KeywordEngine {
 					{
 						element.click();
 					}
-					locatorName = null;
+					locatorType = null;
 					break;
 					
 				case "linkText":
 					element = driver.findElement(By.linkText(locatorValue));
 					element.click();
-					locatorName = null;
+					locatorType = null;
 					
 					break;
 				
