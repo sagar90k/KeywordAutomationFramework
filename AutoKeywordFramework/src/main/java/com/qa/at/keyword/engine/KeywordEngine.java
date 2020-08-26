@@ -13,6 +13,8 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.qa.at.keyowrd.base.Base;
 
@@ -71,10 +73,13 @@ public class KeywordEngine {
 				switch (locatorType) 
 				{
 				
-				case "class":
+				case "xpath":
 					
-					element = driver.findElement(By.className(locatorValue));
+					WebDriverWait wait1 = new WebDriverWait(driver, 10);
+					element = wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(locatorValue)));
 					
+					
+					//element = driver.findElement(By.className(locatorValue));
 					locatorType = null;
 					break;
 					
