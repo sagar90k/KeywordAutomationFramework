@@ -24,7 +24,7 @@ public class KeywordEngine {
 	public Properties prop;
 
 	public static Workbook book;
-	public static Sheet sheet;
+	public static Sheet teststep_sheet,scenario_sheet;
 
 	public Base base;
 	
@@ -32,7 +32,7 @@ public class KeywordEngine {
 	
 	public final String SCENARIO_SHEET_PATH = "C:\\Users\\AMAR\\git\\KeywordAutomationFramework\\AutoKeywordFramework\\src\\main\\java\\com\\qa\\at\\keyword\\scenarios\\scenarios.xlsx";
 
-	public void startExecution(String sheetName) {
+	public void startExecution(String test_Step_SheetName,String scenarios_Sheet_Name) {
 
 		String locatorType=null;
 		String locatorValue=null;
@@ -54,96 +54,136 @@ public class KeywordEngine {
 			e.printStackTrace();
 		}
 
-		sheet = book.getSheet(sheetName);
+		scenario_sheet = book.getSheet(scenarios_Sheet_Name);
+		teststep_sheet = book.getSheet(test_Step_SheetName);
 
-		int k = 0;
-		for (int i = 0; i < sheet.getLastRowNum(); i++) 
+		
+		int sccol=0;
+		String testcase_number;
+		String testcase_name_to_refer;
+		String test_data_col_to_refer;
+		String test_to_execute_or_not;
+		
+
+		String test_start_row;
+		String test_end_row;
+		
+		for(int j=0; j< scenario_sheet.getLastRowNum(); j++)
 		{
 			
-			try {
-				
-				locatorType = sheet.getRow(i + 1).getCell(k + 1).toString().trim();
-				locatorValue = sheet.getRow(i + 1).getCell(k + 2).toString().trim();
-								
-				String action = sheet.getRow(i + 1).getCell(k + 3).toString().trim();
-				String value = sheet.getRow(i + 1).getCell(k + 4).toString().trim();
-				
-				//System.out.println("locatorValue:"+locatorValue);
-				
-				switch (locatorType) 
-				{
-				
-				case "xpath":
-					
-					WebDriverWait wait1 = new WebDriverWait(driver, 10);
-					element = wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(locatorValue)));
-					
-					
-					//element = driver.findElement(By.className(locatorValue));
-					locatorType = null;
-					break;
-					
-				case "linkText":
-					element = driver.findElement(By.linkText(locatorValue));
-					element.click();
-					locatorType = null;
-					
-					break;
-				
-				default:
-					break;
-					
-				}
-				
-				switch (action) {
-				
-				case "open browser":
-					base = new Base();
-					prop = base.init_properties();
-					if (value.isEmpty() || value.equals("NA")) {
-						driver = base.init_driver(prop.getProperty("browser"));
-					} else {
-						driver = base.init_driver(value);
-					}
-					break;
-					
-				case "sendkeys":
-					if (action.equalsIgnoreCase("sendkeys")) 
-					{
-						element.sendKeys(value);
-					} 
-					else if (action.equalsIgnoreCase("click")) 
-					{
-						element.click();
-					}
-					break;
-					
-				case "click":
-				 if (action.equalsIgnoreCase("click")) 
-					{
-						element.click();
-					}
-					break;
-					
-				case "enter url":
-					if (value.isEmpty() || value.equals("NA")) {
-						driver.get(prop.getProperty("url"));
-					} else {
-						driver.get(value);
-					}
-					break;
-					
-				default:
-					break;
-				}
-				
-			}
-
-			catch (Exception e) 
+			testcase_name_to_refer= scenario_sheet.getRow(j + 1).getCell(sccol + 1).toString().trim();
+			
+			test_to_execute_or_not=scenario_sheet.getRow(j + 1).getCell(sccol + 2).toString().trim();
+			
+			test_start_row=scenario_sheet.getRow(j + 1).getCell(sccol + 3).toString().trim();
+			test_end_row=scenario_sheet.getRow(j + 1).getCell(sccol + 4).toString().trim();
+			
+			test_data_col_to_refer= scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
+			
+			int start_row= Integer.parseInt(test_start_row);
+			int end_row= Integer.parseInt(test_end_row);
+			
+			
+			if(test_to_execute_or_not == "Y")
 			{
-				e.printStackTrace();
+						
+								
+						int k = 0;
+						for (int i = start_row; i < end_row ; i++) 
+						{
+							
+							try {
+								
+								locatorType = teststep_sheet.getRow(i + 1).getCell(k + 2).toString().trim();
+								locatorValue = teststep_sheet.getRow(i + 1).getCell(k + 3).toString().trim();
+												
+								String action = teststep_sheet.getRow(i + 1).getCell(k + 4).toString().trim();
+								String value = teststep_sheet.getRow(i + 1).getCell(k + Integer.parseInt(test_data_col_to_refer)).toString().trim();
+								
+								//System.out.println("locatorValue:"+locatorValue);
+								
+								switch (locatorType) 
+								{
+								
+								case "xpath":
+									
+									WebDriverWait wait1 = new WebDriverWait(driver, 10);
+									element = wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(locatorValue)));
+									
+									
+									//element = driver.findElement(By.className(locatorValue));
+									locatorType = null;
+									break;
+									
+								case "linkText":
+									element = driver.findElement(By.linkText(locatorValue));
+									element.click();
+									locatorType = null;
+									
+									break;
+								
+								default:
+									break;
+									
+									
+								}
+								
+								switch (action) {
+								
+								case "open browser":
+									base = new Base();
+									prop = base.init_properties();
+									if (value.isEmpty() || value.equals("NA")) {
+										driver = base.init_driver(prop.getProperty("browser"));
+									} else {
+										driver = base.init_driver(value);
+									}
+									break;
+									
+								case "sendkeys":
+									if (action.equalsIgnoreCase("sendkeys")) 
+									{
+										element.sendKeys(value);
+									} 
+									else if (action.equalsIgnoreCase("click")) 
+									{
+										element.click();
+									}
+									break;
+									
+								case "click":
+								 if (action.equalsIgnoreCase("click")) 
+									{
+										element.click();
+									}
+									break;
+									
+								case "enter url":
+									if (value.isEmpty() || value.equals("NA")) {
+										driver.get(prop.getProperty("url"));
+									} else {
+										driver.get(value);
+									}
+									break;
+									
+								default:
+									break;
+								}
+								
+							}
+				
+							catch (Exception e) 
+							{
+								e.printStackTrace();
+							}
+				
+						}
 			}
-
+			
+			
+			else{
+				continue;
+			}
 		}
 	}
 }
