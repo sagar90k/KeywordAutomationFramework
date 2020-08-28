@@ -68,7 +68,7 @@ public class KeywordEngine {
 		String test_start_row;
 		String test_end_row;
 		
-		for(int j=0; j< scenario_sheet.getLastRowNum(); j++)
+		for(int j=0; j < scenario_sheet.getLastRowNum(); j++)
 		{
 			
 			testcase_name_to_refer= scenario_sheet.getRow(j + 1).getCell(sccol + 1).toString().trim();
@@ -94,11 +94,11 @@ public class KeywordEngine {
 							
 							try {
 								
-								locatorType = teststep_sheet.getRow(i + 1).getCell(k + 2).toString().trim();
-								locatorValue = teststep_sheet.getRow(i + 1).getCell(k + 3).toString().trim();
+								locatorType = teststep_sheet.getRow(i).getCell(k + 2).toString().trim();
+								locatorValue = teststep_sheet.getRow(i).getCell(k + 3).toString().trim();
 												
-								String action = teststep_sheet.getRow(i + 1).getCell(k + 4).toString().trim();
-								String value = teststep_sheet.getRow(i + 1).getCell(k + Integer.parseInt(test_data_col_to_refer)).toString().trim();
+								String action = teststep_sheet.getRow(i).getCell(k + 4).toString().trim();
+								String value = teststep_sheet.getRow(i).getCell(k + Integer.parseInt(test_data_col_to_refer)).toString().trim();
 								
 								//System.out.println("locatorValue:"+locatorValue);
 								
