@@ -68,9 +68,12 @@ public class KeywordEngine {
 		String test_start_row;
 		String test_end_row;
 		
+		int start_row;
+		int end_row;
+		
 		for(int j=0; j < scenario_sheet.getLastRowNum(); j++)
 		{
-			
+			try{
 			testcase_name_to_refer= scenario_sheet.getRow(j + 1).getCell(sccol + 1).toString().trim();
 			
 			test_to_execute_or_not=scenario_sheet.getRow(j + 1).getCell(sccol + 2).toString().trim();
@@ -80,8 +83,8 @@ public class KeywordEngine {
 			
 			test_data_col_to_refer= scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
 			
-			int start_row= Integer.parseInt(test_start_row);
-			int end_row= Integer.parseInt(test_end_row);
+			//start_row= Integer.parseInt(test_start_row);
+			//end_row= Integer.parseInt(test_end_row);
 			
 			
 			if(test_to_execute_or_not == "Y")
@@ -185,5 +188,12 @@ public class KeywordEngine {
 				continue;
 			}
 		}
+			
+		
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	}
 }
+
