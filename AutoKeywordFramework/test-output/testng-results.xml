@@ -1,53 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="2" passed="2">
+<testng-results skipped="0" failed="0" total="0" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="52" started-at="2020-08-28T06:28:38Z" finished-at="2020-08-28T06:28:38Z">
+  <suite name="Default suite" duration-ms="18" started-at="2020-08-28T07:15:11Z" finished-at="2020-08-28T07:15:11Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="52" started-at="2020-08-28T06:28:38Z" finished-at="2020-08-28T06:28:38Z">
-      <class name="com.qa.at.keyword.tests.TestNGBasics">
-        <test-method status="PASS" signature="cehckbeforesuite()[pri:0, instance:com.qa.at.keyword.tests.TestNGBasics@1bbe5e8]" name="cehckbeforesuite" is-config="true" duration-ms="17" started-at="2020-08-28T11:58:38Z" finished-at="2020-08-28T11:58:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- cehckbeforesuite -->
-        <test-method status="PASS" signature="checkBeforeClass()[pri:0, instance:com.qa.at.keyword.tests.TestNGBasics@1bbe5e8]" name="checkBeforeClass" is-config="true" duration-ms="1" started-at="2020-08-28T11:58:38Z" finished-at="2020-08-28T11:58:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- checkBeforeClass -->
-        <test-method status="PASS" signature="checkBeforeMetho()[pri:0, instance:com.qa.at.keyword.tests.TestNGBasics@1bbe5e8]" name="checkBeforeMetho" is-config="true" duration-ms="1" started-at="2020-08-28T11:58:38Z" finished-at="2020-08-28T11:58:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- checkBeforeMetho -->
-        <test-method status="PASS" signature="Testclas()[pri:0, instance:com.qa.at.keyword.tests.TestNGBasics@1bbe5e8]" name="Testclas" duration-ms="6" started-at="2020-08-28T11:58:38Z" finished-at="2020-08-28T11:58:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- Testclas -->
-        <test-method status="PASS" signature="checkAfterMethod()[pri:0, instance:com.qa.at.keyword.tests.TestNGBasics@1bbe5e8]" name="checkAfterMethod" is-config="true" duration-ms="0" started-at="2020-08-28T11:58:38Z" finished-at="2020-08-28T11:58:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- checkAfterMethod -->
-        <test-method status="PASS" signature="checkBeforeMetho()[pri:0, instance:com.qa.at.keyword.tests.TestNGBasics@1bbe5e8]" name="checkBeforeMetho" is-config="true" duration-ms="1" started-at="2020-08-28T11:58:38Z" finished-at="2020-08-28T11:58:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- checkBeforeMetho -->
-        <test-method status="PASS" signature="Testclastwo()[pri:0, instance:com.qa.at.keyword.tests.TestNGBasics@1bbe5e8]" name="Testclastwo" duration-ms="5" started-at="2020-08-28T11:58:38Z" finished-at="2020-08-28T11:58:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- Testclastwo -->
-        <test-method status="PASS" signature="checkAfterMethod()[pri:0, instance:com.qa.at.keyword.tests.TestNGBasics@1bbe5e8]" name="checkAfterMethod" is-config="true" duration-ms="1" started-at="2020-08-28T11:58:38Z" finished-at="2020-08-28T11:58:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- checkAfterMethod -->
-        <test-method status="PASS" signature="checkAfteClass()[pri:0, instance:com.qa.at.keyword.tests.TestNGBasics@1bbe5e8]" name="checkAfteClass" is-config="true" duration-ms="0" started-at="2020-08-28T11:58:38Z" finished-at="2020-08-28T11:58:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- checkAfteClass -->
-        <test-method status="PASS" signature="checkAftesuit()[pri:0, instance:com.qa.at.keyword.tests.TestNGBasics@1bbe5e8]" name="checkAftesuit" is-config="true" duration-ms="0" started-at="2020-08-28T11:58:38Z" finished-at="2020-08-28T11:58:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- checkAftesuit -->
-      </class> <!-- com.qa.at.keyword.tests.TestNGBasics -->
+    <test name="Default test" duration-ms="18" started-at="2020-08-28T07:15:11Z" finished-at="2020-08-28T07:15:11Z">
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

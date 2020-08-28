@@ -12,7 +12,7 @@ public KeywordEngine keywordengine;
 	public void loginTest()
 	{
 	keywordengine = new KeywordEngine();
-	keywordengine.startExecution("login");
+	keywordengine.startExecution("login","scenarios");
 	}
 	
 }
