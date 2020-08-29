@@ -62,7 +62,7 @@ public class KeywordEngine {
 		String testcase_number;
 		String testcase_name_to_refer;
 		String test_data_col_to_refer;
-		String test_to_execute_or_not;
+		int test_to_execute_or_not=0;
 		
 
 		String test_start_row=null;
@@ -78,21 +78,16 @@ public class KeywordEngine {
 			
 			testcase_name_to_refer= scenario_sheet.getRow(j + 1).getCell(sccol + 1).toString().trim();
 			
-			test_to_execute_or_not=scenario_sheet.getRow(j + 1).getCell(sccol + 2).toString().trim();
+			test_or_not=(int) scenario_sheet.getRow(j + 1).getCell(sccol + 2).getNumericCellValue();
 			
-			test_start_row=scenario_sheet.getRow(j + 1).getCell(sccol + 3).toString();
-			test_end_row=scenario_sheet.getRow(j + 1).getCell(sccol + 4).toString();
+			start_row=(int) scenario_sheet.getRow(j + 1).getCell(sccol + 3).getNumericCellValue();
+			end_row=(int) scenario_sheet.getRow(j + 1).getCell(sccol + 4).getNumericCellValue();
 			
 			test_data_col_to_refer= scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
-			try{
-			start_row= Integer.parseInt(test_start_row);
-			end_row= Integer.parseInt(test_end_row);
-			test_or_not=Integer.parseUnsignedInt(test_to_execute_or_not);
-			//data_to_refer=Integer.parseInt(test_data_col_to_refer);					
-			
+					
 			if(test_or_not == 1)
 			{
-						try{
+						
 								
 						int k = 0;
 						for (int i = start_row; i <= end_row ; i++) 
@@ -185,22 +180,14 @@ public class KeywordEngine {
 				
 						}
 						}
-						catch (NumberFormatException e ){
-							e.printStackTrace();
-						}
-			}
-			
+								
 			
 			else{
 				continue;
 			}
 		}
 			
-		
-		catch(Exception e){
-			e.printStackTrace();
-		}
+	
 	}
 	}
-}
 
