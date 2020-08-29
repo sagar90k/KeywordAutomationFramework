@@ -83,8 +83,8 @@ public class KeywordEngine {
 			
 			test_data_col_to_refer= scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
 			
-			//start_row= Integer.parseInt(test_start_row);
-			//end_row= Integer.parseInt(test_end_row);
+			start_row= Integer.parseInt(test_start_row);
+			end_row= Integer.parseInt(test_end_row);
 			
 			
 			if(test_to_execute_or_not == "Y")
