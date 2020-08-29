@@ -67,14 +67,14 @@ public class KeywordEngine {
 
 		int start_row = 0;
 		int end_row = 0;
-		String test_or_not=null;
+		int test_or_not=5;
 		int data_to_refer = 0;
 
 		for (int j = 0; j < scenario_sheet.getLastRowNum(); j++) {
 
 			testcase_name_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 1).toString().trim();
 
-			test_or_not = scenario_sheet.getRow(j + 1).getCell(sccol + 2).toString().trim();
+			test_or_not = (int) scenario_sheet.getRow(j + 1).getCell(sccol + 2).getNumericCellValue();
 
 			start_row = (int) scenario_sheet.getRow(j + 1).getCell(sccol + 3).getNumericCellValue();
 			end_row = (int) scenario_sheet.getRow(j + 1).getCell(sccol + 4).getNumericCellValue();
@@ -82,7 +82,7 @@ public class KeywordEngine {
 			test_data_col_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
 
 			try{
-			if (test_or_not == "Y") {
+			if (test_or_not == 1) {
 
 				int k = 0;
 				for (int i = start_row; i <= end_row; i++) {
