@@ -74,8 +74,8 @@ public class KeywordEngine {
 
 			testcase_name_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 1).toString().trim();
 
-			test_or_not = scenario_sheet.getRow(j + 1).getCell(sccol + 2).getStringCellValue().toString().trim();
-
+			test_or_not =  scenario_sheet.getRow(j + 1).getCell(sccol + 2).toString().trim();
+			
 			start_row = (int) scenario_sheet.getRow(j + 1).getCell(sccol + 3).getNumericCellValue();
 			end_row = (int) scenario_sheet.getRow(j + 1).getCell(sccol + 4).getNumericCellValue();
 
