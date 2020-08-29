@@ -70,6 +70,7 @@ public class KeywordEngine {
 		
 		int start_row;
 		int end_row;
+		int test_or_not;
 		
 		for(int j=0; j < scenario_sheet.getLastRowNum(); j++)
 		{
@@ -85,14 +86,15 @@ public class KeywordEngine {
 			
 			start_row= Integer.parseInt(test_start_row);
 			end_row= Integer.parseInt(test_end_row);
+			test_or_not=Integer.parseUnsignedInt(test_to_execute_or_not);
+					
 			
-			
-			if(test_to_execute_or_not == "Y")
+			if(test_or_not == 1)
 			{
 						
 								
 						int k = 0;
-						for (int i = start_row; i < end_row ; i++) 
+						for (int i = start_row; i <= end_row ; i++) 
 						{
 							
 							try {
