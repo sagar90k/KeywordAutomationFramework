@@ -55,17 +55,18 @@ public class KeywordEngine {
 		}
 
 		scenario_sheet = book.getSheet(scenarios_Sheet_Name);
-		
 		teststep_sheet = book.getSheet(test_Step_SheetName);
 
 		
 		int sccol=0;
-		
 		String testcase_number;
 		String testcase_name_to_refer;
 		String test_data_col_to_refer;
 		int test_to_execute_or_not=0;
 		
+
+		String test_start_row=null;
+		String test_end_row=null;
 		
 		int start_row=0;
 		int end_row=0;
@@ -75,12 +76,14 @@ public class KeywordEngine {
 		for(int j=0; j < scenario_sheet.getLastRowNum(); j++)
 		{
 			
-			//testcase_name_to_refer= scenario_sheet.getRow(j + 1).getCell(sccol + 1).toString().trim();
+			testcase_name_to_refer= scenario_sheet.getRow(j + 1).getCell(sccol + 1).toString().trim();
 								
-			start_row= (int) scenario_sheet.getRow(j + 1).getCell(3).getNumericCellValue(); 
-			end_row=(int) scenario_sheet.getRow(j + 1).getCell(4).getNumericCellValue();
+			start_row= (int) scenario_sheet.getRow(j + 1).getCell(sccol + 3).getNumericCellValue(); 
+			end_row=(int) scenario_sheet.getRow(j + 1).getCell(sccol + 4).getNumericCellValue();
 			
-			test_data_col_to_refer= scenario_sheet.getRow(j + 1).getCell(5).toString().trim();
+			test_data_col_to_refer= scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
+					
+			
 			
 			
 			if(test_or_not == 1)
