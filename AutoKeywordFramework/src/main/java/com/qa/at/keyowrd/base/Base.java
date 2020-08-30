@@ -55,7 +55,7 @@ public class Base {
 		return prop;
 	}
 	
-	public void take_screenshot(WebDriver driver)
+	public void take_screenshot(WebDriver driver, String ssname)
 	{
 		//WebDriver driver=new FirefoxDriver();
 		
@@ -67,7 +67,7 @@ public class Base {
 		
 		try
 		{
-			FileUtils.copyFile(src, new File("F:\\Automation Study\\screenshots\\error.png"));
+			FileUtils.copyFile(src, new File("F:\\Automation Study\\screenshots\\"+ssname+".png"));
 		}
 		catch (IOException e)
 		 {

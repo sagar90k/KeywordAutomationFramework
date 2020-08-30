@@ -64,6 +64,7 @@ public class KeywordEngine {
 
 		String test_start_row = null;
 		String test_end_row = null;
+		String ssname=null;
 		
 		int start_row = 0;
 		int end_row = 0;
@@ -80,6 +81,8 @@ public class KeywordEngine {
 			end_row = (int) scenario_sheet.getRow(j + 1).getCell(sccol + 4).getNumericCellValue();
 
 			test_data_col_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
+			
+			ssname = testcase_name_to_refer+"-";
 
 			try{
 			if (test_or_not == 1) {
@@ -92,11 +95,12 @@ public class KeywordEngine {
 						locatorType = teststep_sheet.getRow(i).getCell(k + 2).toString().trim();
 						locatorValue = teststep_sheet.getRow(i).getCell(k + 3).toString().trim();
 
+						
 						String action = teststep_sheet.getRow(i).getCell(k + 4).toString().trim();
 						String value = teststep_sheet.getRow(i).getCell(k + Integer.parseInt(test_data_col_to_refer))
 								.toString();
 
-						
+						ssname=ssname + teststep_sheet.getRow(i).getCell(k + 1).toString().trim();
 						// System.out.println("locatorValue:"+locatorValue);
 
 						switch (locatorType) {
@@ -175,19 +179,16 @@ public class KeywordEngine {
 								continue;
 							} 
 							else if(value.equals(Elementvalue))
-							{
-																	
+							{																	
 								System.out.println("call Set_status('Passed')");
 								System.out.println("call take_screenshot()");
-								base.take_screenshot(driver);
+								base.take_screenshot(driver,ssname);
 							}
 							else
 							{
 								System.out.println("call Set_status('Failed')");
 								System.out.println("call take_screenshot()");
 							}
-							
-							
 							
 						default:
 							break;
