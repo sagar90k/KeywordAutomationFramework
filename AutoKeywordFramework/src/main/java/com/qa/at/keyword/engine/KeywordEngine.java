@@ -184,7 +184,7 @@ public class KeywordEngine {
 							{																	
 								System.out.println("call Set_status('Passed')");
 								System.out.println("call take_screenshot()");
-								ssname=ssname + teststep_sheet.getRow(i).getCell(k + 1).toString().trim();
+								ssname=ssname + teststep_sheet.getRow(i).getCell(k + 2).toString().trim();
 								base.take_screenshot(driver,ssname);
 								ssname=null;
 							}
