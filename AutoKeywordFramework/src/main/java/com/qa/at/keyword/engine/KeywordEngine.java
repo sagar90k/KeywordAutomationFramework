@@ -84,7 +84,7 @@ public class KeywordEngine {
 
 			test_data_col_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
 			
-			ssname = testcase_number+"-"+testcase_name_to_refer+"-";
+			ssname = "TCNo-"+testcase_number+"-"+testcase_name_to_refer+"-";
 
 			try{
 			if (test_or_not == 1) {
@@ -94,11 +94,11 @@ public class KeywordEngine {
 
 					try {
 
-						locatorType = teststep_sheet.getRow(i).getCell(k + 2).toString().trim();
-						locatorValue = teststep_sheet.getRow(i).getCell(k + 3).toString().trim();
+						locatorType = teststep_sheet.getRow(i).getCell(k + 3).toString().trim();
+						locatorValue = teststep_sheet.getRow(i).getCell(k + 4).toString().trim();
 
 						
-						String action = teststep_sheet.getRow(i).getCell(k + 4).toString().trim();
+						String action = teststep_sheet.getRow(i).getCell(k + 5).toString().trim();
 						String value = teststep_sheet.getRow(i).getCell(k + Integer.parseInt(test_data_col_to_refer))
 								.toString();
 
