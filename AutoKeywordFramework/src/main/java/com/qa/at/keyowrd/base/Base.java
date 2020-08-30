@@ -1,11 +1,16 @@
 package com.qa.at.keyowrd.base;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
+ 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import java.io.FileNotFoundException;
 import java.util.Properties;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.*;
@@ -26,8 +31,7 @@ public class Base {
 				options.setExperimentalOption("useAutomationExtension", false);
 				
 				driver = new ChromeDriver(options);	
-				
-				
+						
 		}
 		return driver;
 }
@@ -49,6 +53,28 @@ public class Base {
 			e.printStackTrace();
 		}
 		return prop;
+	}
+	
+	public void take_screenshot()
+	{
+		//WebDriver driver=new FirefoxDriver();
+		
+		//driver.manage().window().maximize();
+		
+	//	driver.get("http://www.facebook.com");
+		
+		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		
+		try
+		{
+			FileUtils.copyFile(src, new File("E:/Selenium/Screenshots/error.png"));
+		}
+		catch (IOException e)
+		 {
+		  System.out.println(e.getMessage());
+		 
+		 }
+		driver.quit();
 	}
 
 }

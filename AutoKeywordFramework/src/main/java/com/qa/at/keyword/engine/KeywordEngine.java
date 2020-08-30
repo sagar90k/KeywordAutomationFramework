@@ -94,14 +94,9 @@ public class KeywordEngine {
 
 						String action = teststep_sheet.getRow(i).getCell(k + 4).toString().trim();
 						String value = teststep_sheet.getRow(i).getCell(k + Integer.parseInt(test_data_col_to_refer))
-								.toString().trim();
+								.toString();
 
-						exptd_locatorType = teststep_sheet.getRow(i).getCell(k + 2).toString().trim();
-						exptd_locatorValue = teststep_sheet.getRow(i).getCell(k + 3).toString().trim();
-
-						String exptd_action = teststep_sheet.getRow(i).getCell(k + 4).toString().trim();
-						//String value = teststep_sheet.getRow(i).getCell(k + Integer.parseInt(test_data_col_to_refer))
-							//	.toString().trim();
+						
 						// System.out.println("locatorValue:"+locatorValue);
 
 						switch (locatorType) {
@@ -115,7 +110,17 @@ public class KeywordEngine {
 							// driver.findElement(By.className(locatorValue));
 							locatorType = null;
 							break;
+							
+						case "id":
 
+							WebDriverWait wait2 = new WebDriverWait(driver, 10);
+							element = wait2.until(ExpectedConditions.elementToBeClickable(By.id(locatorValue)));
+
+							// element =
+							// driver.findElement(By.className(locatorValue));
+							locatorType = null;
+							break;
+							
 						case "linkText":
 							element = driver.findElement(By.linkText(locatorValue));
 							element.click();
@@ -161,7 +166,26 @@ public class KeywordEngine {
 								driver.get(value);
 							}
 							break;
-
+						
+						case "verifyOutputValue":
+							
+							if (value.isEmpty() || value.equals("NA")) {
+								continue;
+							} 
+							else if(value.equals(element.getText()))
+							{
+																	
+								System.out.println("call Set_status('Passed')");
+								System.out.println("call take_screenshot()");
+							}
+							else
+							{
+								System.out.println("call Set_status('Failed')");
+								System.out.println("call take_screenshot()");
+							}
+							
+							
+							
 						default:
 							break;
 						}
