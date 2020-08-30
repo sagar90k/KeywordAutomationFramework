@@ -179,6 +179,7 @@ public class KeywordEngine {
 																	
 								System.out.println("call Set_status('Passed')");
 								System.out.println("call take_screenshot()");
+								base.take_screenshot(driver);
 							}
 							else
 							{

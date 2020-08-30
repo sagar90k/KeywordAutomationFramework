@@ -55,7 +55,7 @@ public class Base {
 		return prop;
 	}
 	
-	public void take_screenshot()
+	public void take_screenshot(WebDriver driver)
 	{
 		//WebDriver driver=new FirefoxDriver();
 		
@@ -67,14 +67,14 @@ public class Base {
 		
 		try
 		{
-			FileUtils.copyFile(src, new File("E:/Selenium/Screenshots/error.png"));
+			FileUtils.copyFile(src, new File("F:\\Automation Study\\screenshots\\error.png"));
 		}
 		catch (IOException e)
 		 {
 		  System.out.println(e.getMessage());
 		 
 		 }
-		driver.quit();
+		//driver.quit();
 	}
 
 }
