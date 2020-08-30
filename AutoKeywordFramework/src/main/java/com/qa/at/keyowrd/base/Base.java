@@ -9,7 +9,13 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.Properties;
+
+import org.apache.poi.xwpf.usermodel.Document;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -55,6 +61,7 @@ public class Base {
 		return prop;
 	}
 	
+	
 	public void take_screenshot(WebDriver driver, String ssname)
 	{
 		//WebDriver driver=new FirefoxDriver();
@@ -76,5 +83,52 @@ public class Base {
 		 }
 		//driver.quit();
 	}
-
+	
+/*
+	public FileOutputStream create_results_word_doc(String ssname)
+	{
+		      
+	  //Write the Document in file system
+	      FileOutputStream doc_out = null;
+		try {
+			doc_out = new FileOutputStream(new File("F:\\Automation Study\\screenshots\\"+ssname+".docx"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	        	     
+	      System.out.println("createparagraph.docx written successfully");
+	      return doc_out;
+	}
+	
+	
+	public void wite_doc(FileOutputStream doc_out,String ssname){
+		
+		File fsrc= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		
+		try
+		{
+			FileUtils.copyFile(fsrc, new File("F:\\Automation Study\\screenshots\\"+ssname+".png"));
+			
+		}
+		catch (IOException e)
+		 {
+		  System.out.println(e.getMessage());
+		 
+		 }
+		
+		 XWPFDocument document = new XWPFDocument(); 	
+		 XWPFParagraph paragraph = document.createParagraph();
+	      XWPFRun run = paragraph.createRun();
+	      run.setText(" TC:" + ssname);
+	      //run.addPicture(pictureData, pictureType, filename, width, height)
+		
+	      try {
+			document.write(doc_out);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	     
+	}*/
 }

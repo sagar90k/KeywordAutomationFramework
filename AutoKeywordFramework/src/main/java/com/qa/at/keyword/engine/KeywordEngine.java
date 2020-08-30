@@ -2,6 +2,7 @@ package com.qa.at.keyword.engine;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -58,6 +59,7 @@ public class KeywordEngine {
 
 		int sccol = 0;
 		String testcase_number;
+		int testcase_stepnumber=0;
 		String testcase_name_to_refer;
 		String test_data_col_to_refer;
 		int test_to_execute_or_not = 0;
@@ -65,7 +67,7 @@ public class KeywordEngine {
 		String test_start_row = null;
 		String test_end_row = null;
 		String ssname=null;
-		
+		FileOutputStream doc_op=null;
 		int start_row = 0;
 		int end_row = 0;
 		int test_or_not=0;
@@ -85,6 +87,9 @@ public class KeywordEngine {
 			test_data_col_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
 			
 			ssname = "TCNo-"+testcase_number+"-"+testcase_name_to_refer+"-";
+			
+			base.create_results_word_doc(testcase_name_to_refer);
+			
 
 			try{
 			if (test_or_not == 1) {
@@ -94,6 +99,8 @@ public class KeywordEngine {
 
 					try {
 
+						testcase_stepnumber=(int)teststep_sheet.getRow(i).getCell(k + 1).getNumericCellValue();
+						
 						locatorType = teststep_sheet.getRow(i).getCell(k + 3).toString().trim();
 						locatorValue = teststep_sheet.getRow(i).getCell(k + 4).toString().trim();
 
@@ -184,16 +191,17 @@ public class KeywordEngine {
 							{																	
 								System.out.println("call Set_status('Passed')");
 								System.out.println("call take_screenshot()");
-								ssname=ssname + teststep_sheet.getRow(i).getCell(k + 2).toString().trim();
-								base.take_screenshot(driver,ssname);
-								ssname=null;
+								
+								ssname=ssname + "TS-"+ testcase_stepnumber;
+								base.take_screenshot(driver,ssname);								
+							
 							}
 							else
 							{
 								System.out.println("call Set_status('Failed')");
 								System.out.println("call take_screenshot()");
 							}
-							
+							ssname=null;
 						default:
 							break;
 						}
@@ -212,6 +220,13 @@ public class KeywordEngine {
 			}
 			}
 			catch( Exception e){
+				e.printStackTrace();
+			}
+		
+			try {
+				doc_op.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
