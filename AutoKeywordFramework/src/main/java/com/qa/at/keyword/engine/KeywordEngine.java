@@ -171,7 +171,7 @@ public class KeywordEngine {
 							
 							String Elementvalue=element.getText();
 							
-							if (value.isEmpty() || value.equals(Elementvalue)) {
+							if (value.isEmpty() || value.equals("NA")) {
 								continue;
 							} 
 							else if(value.equals(Elementvalue))
