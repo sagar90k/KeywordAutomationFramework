@@ -169,10 +169,12 @@ public class KeywordEngine {
 						
 						case "verifyOutputValue":
 							
-							if (value.isEmpty() || value.equals("NA")) {
+							String Elementvalue=element.getText();
+							
+							if (value.isEmpty() || value.equals(Elementvalue)) {
 								continue;
 							} 
-							else if(value.equals(element.getText()))
+							else if(value.equals(Elementvalue))
 							{
 																	
 								System.out.println("call Set_status('Passed')");
