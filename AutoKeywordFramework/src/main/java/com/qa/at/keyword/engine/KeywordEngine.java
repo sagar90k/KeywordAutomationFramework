@@ -92,7 +92,8 @@ public class KeywordEngine {
 			test_data_col_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
 
 			ssname = "TCNo-" + testcase_number + "-" + testcase_name_to_refer + "-";
-
+			
+			
 			// base.create_results_word_doc(ssname);
 			// base.create_results_word_doc(testcase_name_to_refer);
 
@@ -105,7 +106,8 @@ public class KeywordEngine {
 						try {
 
 							testcase_stepnumber = (int) teststep_sheet.getRow(i).getCell(k + 1).getNumericCellValue();
-
+								
+								
 							locatorType = teststep_sheet.getRow(i).getCell(k + 3).toString().trim();
 							locatorValue = teststep_sheet.getRow(i).getCell(k + 4).toString().trim();
 
@@ -199,6 +201,9 @@ public class KeywordEngine {
 								} else {
 									System.out.println("call Set_status('Failed')");
 									System.out.println("call take_screenshot()");
+									
+									ssname = ssname + "TS-" + testcase_stepnumber;
+									base.take_screenshot(driver, ssname);
 								}
 								ssname = null;
 							default:
