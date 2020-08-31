@@ -62,8 +62,7 @@ public class Base {
 
 	public void take_screenshot(WebDriver driver, String ssname) {
 		
-		FileInputStream st = null;
-	
+		
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		
 
@@ -76,15 +75,9 @@ public class Base {
 
 		}
 		String fsrc ="F:\\Automation Study\\screenshots\\" + ssname + ".png";
-		// driver.quit();
-		try {
-			st = new FileInputStream("F:\\Automation Study\\screenshots\\" + ssname + ".png");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	
 		add_to_word_doc(ssname, fsrc);
+		
 	}
 
 	public void add_to_word_doc(String ssname, String fsrc) {
@@ -107,7 +100,7 @@ public class Base {
 
 		// run.addPicture(sip_stream, pictureType, filename, width, height)
 		try {
-			run.addPicture(new FileInputStream(imgFile), Document.PICTURE_TYPE_PNG, ssname+".png", 1000, 1000);
+			run.addPicture(new FileInputStream(imgFile), Document.PICTURE_TYPE_PNG, ssname+".png", 500, 500);
 			
 			
 		} catch (InvalidFormatException e1) {
