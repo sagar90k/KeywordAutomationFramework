@@ -99,8 +99,15 @@ public class Base {
 		String imgFile = fsrc;
 
 		// run.addPicture(sip_stream, pictureType, filename, width, height)
+		FileInputStream fins=null;
 		try {
-			run.addPicture(new FileInputStream(imgFile), Document.PICTURE_TYPE_PNG, ssname+".png", 500, 500);
+			fins = new FileInputStream(imgFile);
+		} catch (FileNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		try {
+			run.addPicture(fins, Document.PICTURE_TYPE_PNG, ssname+".png", 500, 500);
 			
 			
 		} catch (InvalidFormatException e1) {
@@ -112,6 +119,7 @@ public class Base {
 		}
 
 		try {
+			
 			document.write(doc_out);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -120,6 +128,7 @@ public class Base {
 		
 		System.out.println("createparagraph.docx written successfully");
 		try {
+			fins.close();
 			doc_out.close();
 			document.close();
 		} catch (IOException e) {
