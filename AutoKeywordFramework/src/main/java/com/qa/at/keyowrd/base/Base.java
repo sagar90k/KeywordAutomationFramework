@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.util.Properties;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.Document;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -95,6 +96,7 @@ public class Base {
 		XWPFParagraph paragraph = document.createParagraph();
 		XWPFRun run = paragraph.createRun();
 		run.setText(" TC:" + ssname);
+		run.addCarriageReturn();
 		
 		String imgFile = fsrc;
 
@@ -107,7 +109,7 @@ public class Base {
 			e2.printStackTrace();
 		}
 		try {
-			run.addPicture(fins, Document.PICTURE_TYPE_PNG, ssname+".png", 500, 500);
+			run.addPicture(fins, Document.PICTURE_TYPE_PNG, ssname, Units.toEMU(500), Units.toEMU(500));
 			
 			
 		} catch (InvalidFormatException e1) {
