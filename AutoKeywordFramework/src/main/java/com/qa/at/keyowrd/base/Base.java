@@ -127,6 +127,7 @@ public class Base {
 		
 		System.out.println("createparagraph.docx written successfully");
 		try {
+			doc_out.close();
 			document.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
