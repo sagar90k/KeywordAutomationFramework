@@ -61,6 +61,7 @@ public class Base {
 	}
 
 	public void take_screenshot(WebDriver driver, String ssname) {
+		
 		FileInputStream st = null;
 	
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -72,7 +73,8 @@ public class Base {
 			System.out.println(e.getMessage());
 
 		}
-		// driver.quit();
+	
+		String filesrc="F:\\Automation Study\\screenshots\\" + ssname + ".png";
 		try {
 			st = new FileInputStream("F:\\Automation Study\\screenshots\\" + ssname + ".png");
 		} catch (FileNotFoundException e) {
@@ -80,13 +82,14 @@ public class Base {
 			e.printStackTrace();
 		}
 
-		add_to_word_doc(ssname, src);
+		add_to_word_doc(ssname, filesrc);
 	}
 
-	public void add_to_word_doc(String ssname, File src) {
+	
+	public void add_to_word_doc(String ssname, String filesrc) {
 		
 		XWPFDocument document = new XWPFDocument();
-		// Write the Document in file system
+	
 		FileOutputStream doc_out = null;
 		try {
 			doc_out = new FileOutputStream(new File("F:\\Automation Study\\screenshots\\" + ssname + ".docx"));
@@ -98,10 +101,10 @@ public class Base {
 		XWPFParagraph paragraph = document.createParagraph();
 		XWPFRun run = paragraph.createRun();
 		run.setText(" TC:" + ssname);
-		String imgFile = src.getName(); 
+		//String imgFile = src.getName(); 
 		// run.addPicture(sip_stream, pictureType, filename, width, height)
 		try {
-			run.addPicture(new FileInputStream(imgFile), Document.PICTURE_TYPE_PNG, ssname+".png", 1000, 1000);
+			run.addPicture(new FileInputStream(filesrc), Document.PICTURE_TYPE_PNG, ssname+".png", 500, 500);
 		} catch (InvalidFormatException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
