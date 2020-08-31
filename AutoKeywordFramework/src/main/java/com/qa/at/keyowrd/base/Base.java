@@ -126,6 +126,12 @@ public class Base {
 		}
 		
 		System.out.println("createparagraph.docx written successfully");
+		try {
+			document.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 	}
 
 	/*
