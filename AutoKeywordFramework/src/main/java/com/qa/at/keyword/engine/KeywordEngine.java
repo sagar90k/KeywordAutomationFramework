@@ -67,6 +67,7 @@ public class KeywordEngine {
 		int testcase_stepnumber = 0;
 		String testcase_name_to_refer;
 		String test_data_col_to_refer;
+		String doc_name = null;
 		int test_to_execute_or_not = 0;
 
 		String test_start_row = null;
@@ -80,7 +81,8 @@ public class KeywordEngine {
 
 		for (int j = 0; j < scenario_sheet.getLastRowNum(); j++) {
 
-			XWPFDocument document = new XWPFDocument();
+			XWPFDocument passdocument = new XWPFDocument();
+			XWPFDocument faildocument = new XWPFDocument();
 			
 			testcase_name_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 1).toString().trim();
 
@@ -107,6 +109,7 @@ public class KeywordEngine {
 
 						try {
 							ssname = "TCNo-" + testcase_number + "-" + testcase_name_to_refer + "-";
+							doc_name=ssname;
 							testcase_stepnumber = (int) teststep_sheet.getRow(i).getCell(k + 1).getNumericCellValue();
 								
 								
@@ -209,15 +212,22 @@ public class KeywordEngine {
 									System.out.println("call Set_status('Passed')");
 									System.out.println("call take_screenshot()");
 
-									ssname = ssname + "TS-" + testcase_stepnumber +" - Passed";
-									base.take_screenshot(driver, ssname,document);
+									ssname = ssname + "TS-" + testcase_stepnumber + " - Passed";
+									base.take_screenshot(driver,doc_name,ssname,passdocument);
 
 								} else {
 									System.out.println("call Set_status('Failed')");
 									System.out.println("call take_screenshot()");
 									
 									ssname = ssname + "TS-" + testcase_stepnumber + " - Failed";
-									base.take_screenshot(driver, ssname, document);
+									base.take_screenshot(driver, doc_name,ssname, faildocument);
+									try {
+										faildocument.close();
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+
 								}
 								ssname = null;
 								break;
@@ -230,15 +240,23 @@ public class KeywordEngine {
 									System.out.println("call Set_status('Passed')");
 									System.out.println("call take_screenshot()");
 
-									ssname = ssname + "TS-" + testcase_stepnumber +" - Passed";
-									base.take_screenshot(driver, ssname,document);
+									ssname = ssname + "TS-" + testcase_stepnumber + " - Passed";
+									base.take_screenshot(driver,doc_name, ssname,passdocument);
 
 								} else {
 									System.out.println("call Set_status('Failed')");
 									System.out.println("call take_screenshot()");
 									
 									ssname = ssname + "TS-" + testcase_stepnumber + " - Failed";
-									base.take_screenshot(driver, ssname, document);
+									base.take_screenshot(driver,doc_name, ssname, faildocument);
+									try {
+										faildocument.close();
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+
+									
 								}
 								ssname = null;
 								
@@ -265,7 +283,7 @@ public class KeywordEngine {
 			}
 			
 			try {
-				document.close();
+				passdocument.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

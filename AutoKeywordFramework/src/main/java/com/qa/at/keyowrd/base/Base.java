@@ -61,16 +61,15 @@ public class Base {
 		return prop;
 	}
 
-	public void take_screenshot(WebDriver driver, String ssname, XWPFDocument document ) {
+	public void take_screenshot(WebDriver driver, String doc_name, String ssname, XWPFDocument document) {
 		
 		File src = null;
 		
 		 src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		
-
 		try {
 			FileUtils.copyFile(src, new File("F:\\Automation Study\\screenshots\\" + ssname + ".png"));
-			
+		
 			
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -78,17 +77,17 @@ public class Base {
 		}
 		String fsrc ="F:\\Automation Study\\screenshots\\" + ssname + ".png";
 	
-		add_to_word_doc(ssname, fsrc, document);
+		add_to_word_doc(ssname,doc_name, fsrc, document);
 		
 	}
 
-	public void add_to_word_doc(String ssname, String fsrc, XWPFDocument document) {
+	public void add_to_word_doc(String ssname, String doc_name, String fsrc, XWPFDocument document) {
 		
 		
 		// Write the Document in file system
 		FileOutputStream doc_out = null;
 		try {
-			doc_out = new FileOutputStream(new File("F:\\Automation Study\\screenshots\\" + ssname + ".docx"));
+			doc_out = new FileOutputStream(new File("F:\\Automation Study\\screenshots\\" + doc_name + ".docx"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,7 +95,10 @@ public class Base {
 
 		XWPFParagraph paragraph = document.createParagraph();
 		XWPFRun run = paragraph.createRun();
-		run.setText(" TC:" + ssname);
+		run.setText(" TC: " + ssname);
+		run.setBold(true);
+		run.setColor("FF5400");
+		
 		run.addCarriageReturn();
 		
 		String imgFile = fsrc;
