@@ -54,12 +54,7 @@ public class KeywordEngine {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try {
-			fos=new FileOutputStream(SCENARIO_SHEET_PATH);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 		try {
 			book = WorkbookFactory.create(file);
 		} catch (IOException e) {
