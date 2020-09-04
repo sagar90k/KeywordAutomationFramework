@@ -9,6 +9,8 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.Date;
 import java.util.Date.*;
+
+import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -41,14 +43,23 @@ public class KeywordEngine {
 		String locatorValue = null;
 
 		FileInputStream file = null;
+		
+		FileOutputStream fos =null; 
+		
 
 		try {
 			file = new FileInputStream(SCENARIO_SHEET_PATH);
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		try {
+			fos=new FileOutputStream(SCENARIO_SHEET_PATH);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			book = WorkbookFactory.create(file);
 		} catch (IOException e) {
@@ -56,11 +67,12 @@ public class KeywordEngine {
 			e.printStackTrace();
 		}
 
+
 		scenario_sheet = book.getSheet(scenarios_Sheet_Name);
 		teststep_sheet = book.getSheet(test_Step_SheetName);
 
 		Date date = new Date();
-		System.out.println(new Timestamp(date.getTime()));
+		Timestamp cst= new Timestamp(date.getTime());
 
 		int sccol = 0;
 		String testcase_number;
@@ -84,19 +96,15 @@ public class KeywordEngine {
 			XWPFDocument passdocument = new XWPFDocument();
 			XWPFDocument faildocument = new XWPFDocument();
 			
+			
+			
+			
 			testcase_name_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 1).toString().trim();
-
 			testcase_number = scenario_sheet.getRow(j + 1).getCell(sccol + 0).toString().trim();
-
 			test_or_not = (int) scenario_sheet.getRow(j + 1).getCell(sccol + 2).getNumericCellValue();
-
 			start_row = (int) scenario_sheet.getRow(j + 1).getCell(sccol + 3).getNumericCellValue();
 			end_row = (int) scenario_sheet.getRow(j + 1).getCell(sccol + 4).getNumericCellValue();
-
 			test_data_col_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
-
-			
-			
 			
 			// base.create_results_word_doc(ssname);
 			// base.create_results_word_doc(testcase_name_to_refer);
@@ -108,7 +116,7 @@ public class KeywordEngine {
 					for (int i = start_row; i <= end_row; i++) {
 
 						try {
-							ssname = "TCNo-" + testcase_number + "-" + testcase_name_to_refer + "-";
+							ssname = "TCNo-" + testcase_number + "-" + testcase_name_to_refer;
 							doc_name=ssname;
 							testcase_stepnumber = (int) teststep_sheet.getRow(i).getCell(k + 1).getNumericCellValue();
 								
@@ -212,14 +220,23 @@ public class KeywordEngine {
 									System.out.println("call Set_status('Passed')");
 									System.out.println("call take_screenshot()");
 
-									ssname = ssname + "TS-" + testcase_stepnumber + " - Passed";
+									ssname = ssname + "-TS-" + testcase_stepnumber + " - Passed";
 									base.take_screenshot(driver,doc_name,ssname,passdocument);
+									cst= new Timestamp(date.getTime());
+									
+									//setCellType(cell.CELL_TYPE_STRING);
+									//cell.setCellValue("SoftwareTestingMaterial.com");
+									
+									teststep_sheet.getRow(i).getCell(k + 7).setCellValue("Pass");
+									teststep_sheet.getRow(i).getCell(k + 8).setCellValue(cst);
 
 								} else {
 									System.out.println("call Set_status('Failed')");
 									System.out.println("call take_screenshot()");
 									
-									ssname = ssname + "TS-" + testcase_stepnumber + " - Failed";
+								
+									
+									ssname = ssname + "-TS-" + testcase_stepnumber + " - Failed";
 									base.take_screenshot(driver, doc_name,ssname, faildocument);
 									try {
 										faildocument.close();
@@ -240,14 +257,14 @@ public class KeywordEngine {
 									System.out.println("call Set_status('Passed')");
 									System.out.println("call take_screenshot()");
 
-									ssname = ssname + "TS-" + testcase_stepnumber + " - Passed";
+									ssname = ssname + "-TS-" + testcase_stepnumber + " - Passed";
 									base.take_screenshot(driver,doc_name, ssname,passdocument);
 
 								} else {
 									System.out.println("call Set_status('Failed')");
 									System.out.println("call take_screenshot()");
 									
-									ssname = ssname + "TS-" + testcase_stepnumber + " - Failed";
+									ssname = ssname + "-TS-" + testcase_stepnumber + " - Failed";
 									base.take_screenshot(driver,doc_name, ssname, faildocument);
 									try {
 										faildocument.close();
@@ -289,6 +306,13 @@ public class KeywordEngine {
 				e.printStackTrace();
 			}
 
+		}
+		
+		try {
+			book.write(fos);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
