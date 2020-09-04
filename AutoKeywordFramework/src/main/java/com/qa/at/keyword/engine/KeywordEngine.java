@@ -12,7 +12,7 @@ import java.util.Date.*;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -80,6 +80,8 @@ public class KeywordEngine {
 
 		for (int j = 0; j < scenario_sheet.getLastRowNum(); j++) {
 
+			XWPFDocument document = new XWPFDocument();
+			
 			testcase_name_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 1).toString().trim();
 
 			testcase_number = scenario_sheet.getRow(j + 1).getCell(sccol + 0).toString().trim();
@@ -195,17 +197,41 @@ public class KeywordEngine {
 									System.out.println("call Set_status('Passed')");
 									System.out.println("call take_screenshot()");
 
-									ssname = ssname + "TS-" + testcase_stepnumber;
-									base.take_screenshot(driver, ssname);
+									ssname = ssname + "TS-" + testcase_stepnumber +" - Passed";
+									base.take_screenshot(driver, ssname,document);
 
 								} else {
 									System.out.println("call Set_status('Failed')");
 									System.out.println("call take_screenshot()");
 									
-									ssname = ssname + "TS-" + testcase_stepnumber;
-									base.take_screenshot(driver, ssname);
+									ssname = ssname + "TS-" + testcase_stepnumber + " - Failed";
+									base.take_screenshot(driver, ssname, document);
 								}
 								ssname = null;
+								
+								
+							case "verifyOutputElementPresent":
+								
+								if (value.isEmpty() || value.equals("NA") && (element.isDisplayed())) 
+								{
+									 
+									System.out.println("call Set_status('Passed')");
+									System.out.println("call take_screenshot()");
+
+									ssname = ssname + "TS-" + testcase_stepnumber +" - Passed";
+									base.take_screenshot(driver, ssname,document);
+
+								} else {
+									System.out.println("call Set_status('Failed')");
+									System.out.println("call take_screenshot()");
+									
+									ssname = ssname + "TS-" + testcase_stepnumber + " - Failed";
+									base.take_screenshot(driver, ssname, document);
+								}
+								ssname = null;
+								
+								
+								
 							default:
 								break;
 							}
@@ -223,6 +249,13 @@ public class KeywordEngine {
 					continue;
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				document.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

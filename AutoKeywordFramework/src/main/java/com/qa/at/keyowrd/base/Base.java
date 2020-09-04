@@ -61,10 +61,11 @@ public class Base {
 		return prop;
 	}
 
-	public void take_screenshot(WebDriver driver, String ssname) {
+	public void take_screenshot(WebDriver driver, String ssname, XWPFDocument document ) {
 		
+		File src = null;
 		
-		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		 src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		
 
 		try {
@@ -77,13 +78,13 @@ public class Base {
 		}
 		String fsrc ="F:\\Automation Study\\screenshots\\" + ssname + ".png";
 	
-		add_to_word_doc(ssname, fsrc);
+		add_to_word_doc(ssname, fsrc, document);
 		
 	}
 
-	public void add_to_word_doc(String ssname, String fsrc) {
+	public void add_to_word_doc(String ssname, String fsrc, XWPFDocument document) {
 		
-		XWPFDocument document = new XWPFDocument();
+		
 		// Write the Document in file system
 		FileOutputStream doc_out = null;
 		try {
@@ -132,7 +133,7 @@ public class Base {
 		try {
 			fins.close();
 			doc_out.close();
-			document.close();
+			imgFile = null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
