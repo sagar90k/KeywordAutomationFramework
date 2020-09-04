@@ -93,7 +93,7 @@ public class KeywordEngine {
 
 			test_data_col_to_refer = scenario_sheet.getRow(j + 1).getCell(sccol + 5).toString().trim();
 
-			ssname = "TCNo-" + testcase_number + "-" + testcase_name_to_refer + "-";
+			
 			
 			
 			// base.create_results_word_doc(ssname);
@@ -106,7 +106,7 @@ public class KeywordEngine {
 					for (int i = start_row; i <= end_row; i++) {
 
 						try {
-
+							ssname = "TCNo-" + testcase_number + "-" + testcase_name_to_refer + "-";
 							testcase_stepnumber = (int) teststep_sheet.getRow(i).getCell(k + 1).getNumericCellValue();
 								
 								
@@ -142,12 +142,24 @@ public class KeywordEngine {
 								break;
 
 							case "linkText":
-								element = driver.findElement(By.linkText(locatorValue));
+								WebDriverWait wait3 = new WebDriverWait(driver, 10);
+								element = wait3.until(ExpectedConditions.elementToBeClickable(By.linkText(locatorValue)));
+
+								//element = driver.findElement(By.linkText(locatorValue));
 								element.click();
 								locatorType = null;
 
 								break;
+								
+							case "class":
+								WebDriverWait wait4 = new WebDriverWait(driver, 10);
+								element = wait4.until(ExpectedConditions.elementToBeClickable(By.className(locatorValue)));
+						
+								element.click();
+								locatorType = null;
 
+								break;
+								
 							default:
 								break;
 
@@ -208,7 +220,7 @@ public class KeywordEngine {
 									base.take_screenshot(driver, ssname, document);
 								}
 								ssname = null;
-								
+								break;
 								
 							case "verifyOutputElementPresent":
 								
@@ -230,7 +242,7 @@ public class KeywordEngine {
 								}
 								ssname = null;
 								
-								
+								break;
 								
 							default:
 								break;
