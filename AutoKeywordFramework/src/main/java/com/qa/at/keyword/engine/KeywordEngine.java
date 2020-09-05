@@ -267,7 +267,6 @@ public class KeywordEngine {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
-
 									
 								}
 								ssname = null;
@@ -279,7 +278,6 @@ public class KeywordEngine {
 							}
 
 						}
-
 						catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -300,15 +298,14 @@ public class KeywordEngine {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			try {
+				book.write(fos);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
-		
-		try {
-			book.write(fos);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+				
 	}
 }
